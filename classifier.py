@@ -11,9 +11,9 @@ RANDOM_SEED = 42
 DATASET_FILE = "classification.txt"
 TEST_SPLIT_SIZE = 0.3
 
-HIDDEN_LAYERS = (4,2)
 EPOCHS = 1000
-LEARNING_RATE = 1.6
+HIDDEN_LAYERS_LIST = [(4,2),(8,4),(16,8),(32,16)]
+LEARNING_RATES = [2, 1.6, 1, 0.1, 0.01, 0.001]
 
 TREES = 1000
 MAX_FEATURES = 3
@@ -37,6 +37,9 @@ def scale_dataset(x_train, x_test):
 
 def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_test):
     print("\n--------- Random Forest ----------")
+    print(f" Trees: {trees}")
+    print(f" Max Features: {max_features}")
+    print(f" Criterion: {criterion}")
     
     start = time()
 
@@ -68,6 +71,11 @@ def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_te
 
 def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_train, y_test):
     print("\n-------------- MLP ---------------")
+    print(f" Hidden layers: {hidden_layers}")
+    print(f" Epochs: {epochs}")
+    print(f" Learning rate: {learning_rate}")
+    print(f" Batch size: {batch_size}")
+
     mlp = MLPClassifier(
         hidden_layer_sizes=hidden_layers,
         learning_rate_init=learning_rate,
@@ -99,8 +107,39 @@ def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_tra
     print("----------------------------------")
 
 
+    return {
+        'accurance_score': accuracy_score(y_test, mlp_pred),
+        'precision_score': precision_score(y_test, mlp_pred, average='macro', zero_division=0.0),
+        'recall_score': recall_score(y_test, mlp_pred, average='macro'),
+        'f1_score': f1_score(y_test, mlp_pred, average='macro')
+    }
+
+ 
+
 x_train, x_test, y_train, y_test = load_dataset(DATASET_FILE, TEST_SPLIT_SIZE)
 x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
 
 random_forest(TREES, MAX_FEATURES, CRITERION, x_train, x_test, y_train, y_test)
-mlp(HIDDEN_LAYERS, EPOCHS, LEARNING_RATE, len(x_train), x_train_scaled, x_test_scaled, y_train, y_test)
+
+results = []
+
+for hidden_layers in HIDDEN_LAYERS_LIST:
+    for learning_rate in LEARNING_RATES:
+
+        result = {
+            'learning_rate'
+        }
+
+        results.append
+        
+
+with open(RESULTS_CSV, mode="w", encoding="utf-8", newline="") as file:
+    fieldnames = ["generations", "population_size", "mean_fitness", "best_fitness", "best_weight_item_proportion", "standard_deviation", "mean_time"]
+    writer = csv.DictWriter(file, fieldnames)
+
+    writer.writeheader()
+    for row in all_results:
+        writer.writerow(row)
+
+for learning_rate in LEARNING_RATES:
+    mlp(HIDDEN_LAYERS, EPOCHS, learning_rate, len(x_train), x_train_scaled, x_test_scaled, y_train, y_test)

@@ -1,70 +1,103 @@
+from time import time
+
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.neural_network import MLPRegressor
 from sklearn.metrics import root_mean_squared_error, mean_absolute_error, mean_squared_error
 
-file_name = './regression.txt'
-colunas = ['ID', 'Sinal1', 'Sinal2', 'Sinal3', 'Sinal4', 'Sinal5', 'Gravidade']
-df = pd.read_csv(file_name, names=colunas)
+RANDOM_SEED = 42
+DATASET_FILE = "regression.txt"
+TEST_SPLIT_SIZE = 0.3
 
-X = df.drop(['ID', 'Sinal1', 'Sinal2'], axis=1)
-y = df['Gravidade']
+HIDDEN_LAYERS = (8,4)
+EPOCHS = 10000
+LEARNING_RATE = 0.01
 
-# Divisão em Treino (70%) e Teste (30%)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+TREES = 10
+MAX_FEATURES = 3
+CRITERION = 'squared_error'
 
-# Normalização Z-score
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+def load_dataset(file: str, test_split_size: float) -> list:
+    columns = ['ID', 'Sinal1', 'Sinal2', 'Sinal3', 'Sinal4', 'Gravidade']
+    df = pd.read_csv(file, names=columns)
 
-print("\n--- Treinando Random Forest ---")
-rf = RandomForestRegressor(
-    n_estimators=10,
-    criterion='squared_error',
-    random_state=42,
-    max_depth=None,
-    max_features=3,
-    min_samples_split=2,
-    min_samples_leaf=1,
-    min_impurity_decrease=0.0,
-    ccp_alpha=0.0
-)
-rf.fit(X_train, y_train)
-rf_pred = rf.predict(X_test)
+    x = df.drop(['ID', 'Sinal1', 'Sinal2', 'Gravidade'], axis=1)
+    y = df['Gravidade']
 
-print("--- Treinando Rede Neural MLP ---")
-mlp = MLPRegressor(
-    hidden_layer_sizes=(8,4),
-    activation='logistic',
-    solver='sgd',
-    max_iter=10000,
-    random_state=42, 
-    learning_rate='constant',
-    momentum=0.0,
-    batch_size=len(X_train_scaled),
-    nesterovs_momentum=False,
-    learning_rate_init=0.01,
-    alpha=0.0,
-)
+    return train_test_split(x, y, test_size=test_split_size, random_state=RANDOM_SEED)
 
-mlp.fit(X_train_scaled, y_train)
-mlp_pred = mlp.predict(X_test_scaled)
+def scale_dataset(x_train, x_test):
+    scaler = StandardScaler()
+    x_train_scaled = scaler.fit_transform(x_train)
+    x_test_scaled = scaler.transform(x_test)
 
+    return x_train_scaled, x_test_scaled
 
-# 5. COMPARAÇÃO DE RESULTADOS
-print("--- Random Forest ---")
-print(f" Root Mean Squared Error: {root_mean_squared_error(y_test, rf_pred):.8f}")
-print(f" Mean Squared Error: {mean_squared_error(y_test, rf_pred):.8f}")
-print(f" Mean Absolute Error: {mean_absolute_error(y_test, rf_pred):.8f}")
+def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_test):
+    print("\n--------- Random Forest ----------")
 
-# 5. COMPARAÇÃO DE RESULTADOS
-print("--- MLP ---")
-print(f" Root Mean Squared Error: {root_mean_squared_error(y_test, mlp_pred):.8f}")
-print(f" Mean Squared Error: {mean_squared_error(y_test, mlp_pred):.8f}")
-print(f" Mean Absolute Error: {mean_absolute_error(y_test, mlp_pred):.8f}")
+    rf = RandomForestRegressor(
+        n_estimators=trees,
+        criterion=criterion,
+        random_state=RANDOM_SEED,
+        max_depth=None,
+        max_features=max_features,
+        min_samples_split=2,
+        min_samples_leaf=1,
+        min_impurity_decrease=0.0,
+        ccp_alpha=0.0
+    )
+
+    start = time()
+
+    rf.fit(x_train, y_train)
+
+    print(f" Training time: {(time()-start):.2f}s")
+    print("----------------------------------\n")
+
+    rf_pred = rf.predict(x_test)
+
+    print("------------- Metrics ------------")
+    print(f" Root Mean Squared Error: {root_mean_squared_error(y_test, rf_pred):.8f}")
+    print(f" Mean Squared Error: {mean_squared_error(y_test, rf_pred):.8f}")
+    print(f" Mean Absolute Error: {mean_absolute_error(y_test, rf_pred):.8f}")
+    print("----------------------------------")
+
+def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_train, y_test):
+    print("\n-------------- MLP ---------------")
+    mlp = MLPRegressor(
+        hidden_layer_sizes=hidden_layers,
+        activation='logistic',
+        solver='sgd',
+        max_iter=epochs,
+        random_state=RANDOM_SEED, 
+        learning_rate='constant',
+        momentum=0.0,
+        batch_size=batch_size,
+        nesterovs_momentum=False,
+        learning_rate_init=learning_rate,
+        alpha=0.0,
+    )
+
+    start = time()
+
+    mlp.fit(x_train, y_train)
+
+    print(f" Training time: {(time()-start):.2f}s")
+    print("----------------------------------\n")
+
+    mlp_pred = mlp.predict(x_test)
+
+    print("--------------Metrics-------------")
+    print(f" Root Mean Squared Error: {root_mean_squared_error(y_test, mlp_pred):.8f}")
+    print(f" Mean Squared Error: {mean_squared_error(y_test, mlp_pred):.8f}")
+    print(f" Mean Absolute Error: {mean_absolute_error(y_test, mlp_pred):.8f}")
+    print("----------------------------------")
+
+x_train, x_test, y_train, y_test = load_dataset(DATASET_FILE, TEST_SPLIT_SIZE)
+x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
+
+random_forest(TREES, MAX_FEATURES, CRITERION, x_train, x_test, y_train, y_test)
+mlp(HIDDEN_LAYERS, EPOCHS, LEARNING_RATE, len(x_train), x_train_scaled, x_test_scaled, y_train, y_test)
