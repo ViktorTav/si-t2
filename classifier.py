@@ -1,88 +1,106 @@
+from time import time
+
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
-file_name = './with_label.txt'
-colunas = ['ID', 'Sinal1', 'Sinal2', 'Sinal3', 'Sinal4', 'Sinal5', 'Sinal6', 'Label']
-df = pd.read_csv(file_name, names=colunas)
+RANDOM_SEED = 42
+DATASET_FILE = "classification.txt"
+TEST_SPLIT_SIZE = 0.3
 
-X = df.drop(['ID', 'Sinal1', 'Sinal2', 'Label'], axis=1)
-y = df['Label']
+HIDDEN_LAYERS = (4,2)
+EPOCHS = 1000
+LEARNING_RATE = 1.6
 
-# Divisão em Treino (70%) e Teste (30%)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+TREES = 1000
+MAX_FEATURES = 3
+CRITERION = 'gini'
 
-# Normalização Z-score
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+def load_dataset(file: str, test_split_size: float) -> list:
+    columns = ['ID', 'Sinal1', 'Sinal2', 'Sinal3', 'Sinal4', 'Sinal5', 'Sinal6', 'Label']
+    df = pd.read_csv(file, names=columns)
 
-print("\n--- Treinando Random Forest ---")
-rf = RandomForestClassifier(
-    n_estimators=10,
-    criterion='gini',
-    random_state=42,
-    max_depth=None,
-    max_features=3,
-    min_samples_split=2,
-    min_samples_leaf=1,
-    min_impurity_decrease=0.0,
-    ccp_alpha=0.0
-)
-rf.fit(X_train, y_train)
-rf_pred = rf.predict(X_test)
+    x = df.drop(['ID', 'Sinal1', 'Sinal2', 'Label'], axis=1)
+    y = df['Label']
 
-print("--- Treinando Rede Neural MLP ---")
-mlp = MLPClassifier(
-    hidden_layer_sizes=(4,2),
-    activation='logistic',
-    solver='sgd',
-    max_iter=1000,
-    random_state=42, 
-    learning_rate='constant',
-    momentum=0.0,
-    batch_size=len(X_train_scaled),
-    nesterovs_momentum=False,
-    learning_rate_init=1.6,
-    alpha=0.0,
-)
+    return train_test_split(x, y, test_size=test_split_size, random_state=RANDOM_SEED)
 
-mlp.fit(X_train_scaled, y_train)
-mlp_pred = mlp.predict(X_test_scaled)
+def scale_dataset(x_train, x_test):
+    scaler = StandardScaler()
+    x_train_scaled = scaler.fit_transform(x_train)
+    x_test_scaled = scaler.transform(x_test)
+
+    return x_train_scaled, x_test_scaled
+
+def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_test):
+    print("\n--------- Random Forest ----------")
+    
+    start = time()
+
+    rf = RandomForestClassifier(
+        n_estimators=trees,
+        criterion=criterion,
+        max_features=max_features,
+        random_state=RANDOM_SEED,
+        max_depth=None,
+        min_samples_split=2,
+        min_samples_leaf=1,
+        min_impurity_decrease=0.0,
+        ccp_alpha=0.0
+    )
+
+    rf.fit(x_train, y_train)
+
+    print(f" Training time: {(time()-start):.2f}s")
+    print("----------------------------------\n")
+
+    rf_pred = rf.predict(x_test)
+
+    print("------------- Metrics ------------")
+    print(f" Accurancy score: {accuracy_score(y_test, rf_pred):.2%}")
+    print(f" Precision score: {precision_score(y_test, rf_pred, average='macro'):.2%}")
+    print(f" Recall score: {recall_score(y_test, rf_pred, average='macro'):.2%}")
+    print(f" F1 score: {f1_score(y_test, rf_pred, average='macro'):.2%}")
+    print("----------------------------------")
+
+def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_train, y_test):
+    print("\n-------------- MLP ---------------")
+    mlp = MLPClassifier(
+        hidden_layer_sizes=hidden_layers,
+        learning_rate_init=learning_rate,
+        batch_size=batch_size,
+        max_iter=epochs,
+        random_state=RANDOM_SEED, 
+        activation='logistic',
+        solver='sgd',
+        learning_rate='constant',
+        momentum=0.0,
+        nesterovs_momentum=False,
+        alpha=0.0,
+    )
+
+    start = time()
+
+    mlp.fit(x_train, y_train)
+
+    print(f" Training time: {(time()-start):.2f}s")
+    print("----------------------------------\n")
+
+    mlp_pred = mlp.predict(x_test)
+
+    print("--------------Metrics-------------")
+    print(f" Accurancy score: {accuracy_score(y_test, mlp_pred):.2%}")
+    print(f" Precision score: {precision_score(y_test, mlp_pred, average='macro', zero_division=0.0):.2%}")
+    print(f" Recall score: {recall_score(y_test, mlp_pred, average='macro'):.2%}")
+    print(f" F1 score: {f1_score(y_test, mlp_pred, average='macro'):.2%}")
+    print("----------------------------------")
 
 
-print("--- Random Forest ---")
-print(f" Accurancy score: {accuracy_score(y_test, rf_pred):.2%}")
-print(f" Precision score: {precision_score(y_test, rf_pred, average='macro'):.2%}")
-print(f" Recall score: {recall_score(y_test, rf_pred, average='macro'):.2%}")
-print(f" F1 score: {f1_score(y_test, rf_pred, average='macro'):.2%}")
+x_train, x_test, y_train, y_test = load_dataset(DATASET_FILE, TEST_SPLIT_SIZE)
+x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
 
-print("\n\n")
-
-print("--- MLP ---")
-print(f" Accurancy score: {accuracy_score(y_test, mlp_pred):.2%}")
-print(f" Precision score: {precision_score(y_test, mlp_pred, average='macro', zero_division=0.0):.2%}")
-print(f" Recall score: {recall_score(y_test, mlp_pred, average='macro'):.2%}")
-print(f" F1 score: {f1_score(y_test, mlp_pred, average='macro'):.2%}")
-
-
-fig, ax = plt.subplots(1, 2, figsize=(12, 5))
-
-sns.heatmap(confusion_matrix(y_test, rf_pred), annot=True, fmt='d', cmap='Blues', ax=ax[0])
-ax[0].set_title('Matriz de Confusão: Random Forest')
-ax[0].set_xlabel('Predito')
-ax[0].set_ylabel('Real')
-
-sns.heatmap(confusion_matrix(y_test, mlp_pred), annot=True, fmt='d', cmap='Greens', ax=ax[1])
-ax[1].set_title('Matriz de Confusão: MLP')
-ax[1].set_xlabel('Predito')
-ax[1].set_ylabel('Real')
-
-plt.tight_layout()
-plt.savefig("confusion_matrix.png")
+random_forest(TREES, MAX_FEATURES, CRITERION, x_train, x_test, y_train, y_test)
+mlp(HIDDEN_LAYERS, EPOCHS, LEARNING_RATE, len(x_train), x_train_scaled, x_test_scaled, y_train, y_test)
