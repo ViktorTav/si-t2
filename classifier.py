@@ -1,3 +1,4 @@
+import csv
 from time import time
 
 import pandas as pd
@@ -9,6 +10,7 @@ from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, r
 
 RANDOM_SEED = 42
 DATASET_FILE = "classification.txt"
+RESULTS_CSV = "classification.csv"
 TEST_SPLIT_SIZE = 0.3
 
 EPOCHS = 1000
@@ -62,12 +64,12 @@ def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_te
 
     rf_pred = rf.predict(x_test)
 
-    print("------------- Metrics ------------")
-    print(f" Accurancy score: {accuracy_score(y_test, rf_pred):.2%}")
-    print(f" Precision score: {precision_score(y_test, rf_pred, average='macro'):.2%}")
-    print(f" Recall score: {recall_score(y_test, rf_pred, average='macro'):.2%}")
-    print(f" F1 score: {f1_score(y_test, rf_pred, average='macro'):.2%}")
-    print("----------------------------------")
+    return {
+        'accurance_score': accuracy_score(y_test, rf_pred),
+        'precision_score': precision_score(y_test, rf_pred, average='macro', zero_division=0.0),
+        'recall_score': recall_score(y_test, rf_pred, average='macro'),
+        'f1_score': f1_score(y_test, rf_pred, average='macro')
+    }
 
 def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_train, y_test):
     print("\n-------------- MLP ---------------")
@@ -99,22 +101,13 @@ def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_tra
 
     mlp_pred = mlp.predict(x_test)
 
-    print("--------------Metrics-------------")
-    print(f" Accurancy score: {accuracy_score(y_test, mlp_pred):.2%}")
-    print(f" Precision score: {precision_score(y_test, mlp_pred, average='macro', zero_division=0.0):.2%}")
-    print(f" Recall score: {recall_score(y_test, mlp_pred, average='macro'):.2%}")
-    print(f" F1 score: {f1_score(y_test, mlp_pred, average='macro'):.2%}")
-    print("----------------------------------")
-
-
     return {
-        'accurance_score': accuracy_score(y_test, mlp_pred),
+        'accuracy_score': f"{accuracy_score(y_test, mlp_pred)}",
         'precision_score': precision_score(y_test, mlp_pred, average='macro', zero_division=0.0),
         'recall_score': recall_score(y_test, mlp_pred, average='macro'),
         'f1_score': f1_score(y_test, mlp_pred, average='macro')
     }
 
- 
 
 x_train, x_test, y_train, y_test = load_dataset(DATASET_FILE, TEST_SPLIT_SIZE)
 x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
@@ -125,21 +118,17 @@ results = []
 
 for hidden_layers in HIDDEN_LAYERS_LIST:
     for learning_rate in LEARNING_RATES:
+        result = mlp(hidden_layers, EPOCHS, learning_rate, len(x_train_scaled), x_train_scaled, x_test_scaled, y_train, y_test)
 
-        result = {
-            'learning_rate'
-        }
+        result['hidden_layers'] = hidden_layers
+        result['learning_rate'] = learning_rate
 
-        results.append
-        
+        results.append(result)
 
 with open(RESULTS_CSV, mode="w", encoding="utf-8", newline="") as file:
-    fieldnames = ["generations", "population_size", "mean_fitness", "best_fitness", "best_weight_item_proportion", "standard_deviation", "mean_time"]
+    fieldnames = ["hidden_layers", "learning_rate", 'accuracy_score', 'precision_score', 'recall_score', 'f1_score']
     writer = csv.DictWriter(file, fieldnames)
 
     writer.writeheader()
-    for row in all_results:
+    for row in results:
         writer.writerow(row)
-
-for learning_rate in LEARNING_RATES:
-    mlp(HIDDEN_LAYERS, EPOCHS, learning_rate, len(x_train), x_train_scaled, x_test_scaled, y_train, y_test)
