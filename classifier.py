@@ -1,4 +1,5 @@
 import csv
+import json
 from time import time
 
 import pandas as pd
@@ -9,16 +10,19 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
 RANDOM_SEED = 42
+
 DATASET_FILE = "classification.txt"
-RESULTS_CSV = "classification.csv"
+MLP_RESULTS = "mlp_c_results.json"
+RF_RESULTS = "rf_c_results.json"
+
 TEST_SPLIT_SIZE = 0.3
 
 EPOCHS = 1000
 HIDDEN_LAYERS_LIST = [(4,2),(8,4),(16,8),(32,16)]
 LEARNING_RATES = [2, 1.6, 1, 0.1, 0.01, 0.001]
 
-TREES = 1000
-MAX_FEATURES = 3
+TREES_LIST = [1, 10, 100]
+MAX_FEATURES_LIST = [2, 3]
 CRITERION = 'gini'
 
 def load_dataset(file: str, test_split_size: float) -> list:
@@ -59,16 +63,19 @@ def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_te
 
     rf.fit(x_train, y_train)
 
-    print(f" Training time: {(time()-start):.2f}s")
+    training_time = time()-start
+
+    print(f" Training time: {(training_time):.2f}s")
     print("----------------------------------\n")
 
     rf_pred = rf.predict(x_test)
 
     return {
-        'accurance_score': accuracy_score(y_test, rf_pred),
-        'precision_score': precision_score(y_test, rf_pred, average='macro', zero_division=0.0),
-        'recall_score': recall_score(y_test, rf_pred, average='macro'),
-        'f1_score': f1_score(y_test, rf_pred, average='macro')
+        'accuracy_score': round(accuracy_score(y_test, rf_pred), 2),
+        'precision_score': round(precision_score(y_test, rf_pred, average='macro', zero_division=0.0),2),
+        'recall_score': round(recall_score(y_test, rf_pred, average='macro'),2),
+        'f1_score': round(f1_score(y_test, rf_pred, average='macro'),2),
+        'training_time': round(training_time,2)
     }
 
 def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_train, y_test):
@@ -96,39 +103,77 @@ def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_tra
 
     mlp.fit(x_train, y_train)
 
-    print(f" Training time: {(time()-start):.2f}s")
+    training_time = time()-start
+
+    print(f" Training time: {(training_time):.2f}s")
     print("----------------------------------\n")
 
     mlp_pred = mlp.predict(x_test)
 
     return {
-        'accuracy_score': f"{accuracy_score(y_test, mlp_pred)}",
-        'precision_score': precision_score(y_test, mlp_pred, average='macro', zero_division=0.0),
-        'recall_score': recall_score(y_test, mlp_pred, average='macro'),
-        'f1_score': f1_score(y_test, mlp_pred, average='macro')
+        'accuracy_score': round(accuracy_score(y_test, mlp_pred), 2),
+        'precision_score': round(precision_score(y_test, mlp_pred, average='macro', zero_division=0.0),2),
+        'recall_score': round(recall_score(y_test, mlp_pred, average='macro'),2),
+        'f1_score': round(f1_score(y_test, mlp_pred, average='macro'),2),
+        'training_time': round(training_time,2)
     }
 
+def test_mlp(learning_rates, hidden_layers_list, x_train_scaled, x_test_scaled, y_train, y_test):
+    results = []
+    best_result = None
 
-x_train, x_test, y_train, y_test = load_dataset(DATASET_FILE, TEST_SPLIT_SIZE)
-x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
+    for hidden_layers in hidden_layers_list:
+        for learning_rate in learning_rates:
+            result = mlp(hidden_layers, EPOCHS, learning_rate, len(x_train_scaled), x_train_scaled, x_test_scaled, y_train, y_test)
 
-random_forest(TREES, MAX_FEATURES, CRITERION, x_train, x_test, y_train, y_test)
+            result['hidden_layers'] = hidden_layers
+            result['learning_rate'] = learning_rate
+            result['epochs'] = EPOCHS
 
-results = []
+            if best_result is None or result['f1_score'] > best_result['f1_score']:
+                best_result = result 
 
-for hidden_layers in HIDDEN_LAYERS_LIST:
-    for learning_rate in LEARNING_RATES:
-        result = mlp(hidden_layers, EPOCHS, learning_rate, len(x_train_scaled), x_train_scaled, x_test_scaled, y_train, y_test)
+            results.append(result)
 
-        result['hidden_layers'] = hidden_layers
-        result['learning_rate'] = learning_rate
+    with open(MLP_RESULTS, mode="w", encoding="utf-8", newline="") as file:
+        file.write(json.dumps(results, indent=4))
 
-        results.append(result)
+    return best_result
 
-with open(RESULTS_CSV, mode="w", encoding="utf-8", newline="") as file:
-    fieldnames = ["hidden_layers", "learning_rate", 'accuracy_score', 'precision_score', 'recall_score', 'f1_score']
-    writer = csv.DictWriter(file, fieldnames)
+def test_random_forest(trees_list, max_features_list, criterion, x_train, x_test, y_train, y_test):
+    results = []
+    best_result = None
+    
+    for trees in trees_list:
+        for max_features in max_features_list:
+            result = random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_test)
 
-    writer.writeheader()
-    for row in results:
-        writer.writerow(row)
+            result['trees'] = trees
+            result['max_features'] = max_features
+            result['criterion'] = criterion
+
+            if best_result is None or result['f1_score'] > best_result['f1_score']:
+                best_result = result 
+
+            results.append(result)
+
+    with open(RF_RESULTS, mode="w", encoding="utf-8", newline="") as file:
+        file.write(json.dumps(results, indent=4))
+
+    return best_result
+
+def main():
+    x_train, x_test, y_train, y_test = load_dataset(DATASET_FILE, TEST_SPLIT_SIZE)
+    x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
+
+    rf_result = test_random_forest(TREES_LIST, MAX_FEATURES_LIST, CRITERION, x_train, x_test, y_train, y_test)
+    mlp_result = test_mlp(LEARNING_RATES, HIDDEN_LAYERS_LIST, x_train_scaled, x_test_scaled, y_train, y_test)
+
+    print("\n---------- Random Forest - Best Result ----------")
+    print(rf_result)
+
+    print("\n--------------- MLP - Best Result ---------------")
+    print(mlp_result)
+
+if __name__ == "__main__":
+    main()

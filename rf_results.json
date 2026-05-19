@@ -1,0 +1,182 @@
+[
+    {
+        "accuracy_score": 0.98,
+        "precision_score": 0.73,
+        "recall_score": 0.75,
+        "f1_score": 0.74,
+        "training_time": 0.01,
+        "trees": 1,
+        "max_features": 2,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.0,
+        "trees": 1,
+        "max_features": 3,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.0,
+        "trees": 1,
+        "max_features": 4,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.72,
+        "f1_score": 0.72,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 2,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 0.98,
+        "precision_score": 0.73,
+        "recall_score": 0.75,
+        "f1_score": 0.74,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 3,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.03,
+        "trees": 10,
+        "max_features": 4,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 0.94,
+        "precision_score": 0.71,
+        "recall_score": 0.67,
+        "f1_score": 0.69,
+        "training_time": 0.13,
+        "trees": 100,
+        "max_features": 2,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.13,
+        "trees": 100,
+        "max_features": 3,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.15,
+        "trees": 100,
+        "max_features": 4,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 0.98,
+        "precision_score": 0.73,
+        "recall_score": 0.75,
+        "f1_score": 0.74,
+        "training_time": 0.0,
+        "trees": 1,
+        "max_features": 2,
+        "criterion": "entropy"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.0,
+        "trees": 1,
+        "max_features": 3,
+        "criterion": "entropy"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.0,
+        "trees": 1,
+        "max_features": 4,
+        "criterion": "entropy"
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.72,
+        "f1_score": 0.72,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 2,
+        "criterion": "entropy"
+    },
+    {
+        "accuracy_score": 0.98,
+        "precision_score": 0.73,
+        "recall_score": 0.75,
+        "f1_score": 0.74,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 3,
+        "criterion": "entropy"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 4,
+        "criterion": "entropy"
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.71,
+        "f1_score": 0.72,
+        "training_time": 0.14,
+        "trees": 100,
+        "max_features": 2,
+        "criterion": "entropy"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.17,
+        "trees": 100,
+        "max_features": 3,
+        "criterion": "entropy"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.18,
+        "trees": 100,
+        "max_features": 4,
+        "criterion": "entropy"
+    }
+]
