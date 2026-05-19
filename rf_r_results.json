@@ -1,0 +1,44 @@
+[
+    {
+        "rmse": 10.6183,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 2,
+        "criterion": "squared_error"
+    },
+    {
+        "rmse": 10.6183,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 3,
+        "criterion": "squared_error"
+    },
+    {
+        "rmse": 10.2693,
+        "training_time": 0.21,
+        "trees": 100,
+        "max_features": 2,
+        "criterion": "squared_error"
+    },
+    {
+        "rmse": 10.2693,
+        "training_time": 0.22,
+        "trees": 100,
+        "max_features": 3,
+        "criterion": "squared_error"
+    },
+    {
+        "rmse": 10.2038,
+        "training_time": 0.55,
+        "trees": 250,
+        "max_features": 2,
+        "criterion": "squared_error"
+    },
+    {
+        "rmse": 10.2038,
+        "training_time": 0.51,
+        "trees": 250,
+        "max_features": 3,
+        "criterion": "squared_error"
+    }
+]

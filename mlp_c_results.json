@@ -1,0 +1,938 @@
+[
+    {
+        "accuracy_score": 0.82,
+        "precision_score": 0.42,
+        "recall_score": 0.49,
+        "f1_score": 0.45,
+        "training_time": 0.06,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 2,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.94,
+        "precision_score": 0.72,
+        "recall_score": 0.69,
+        "f1_score": 0.7,
+        "training_time": 0.24,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 2,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.94,
+        "precision_score": 0.72,
+        "recall_score": 0.69,
+        "f1_score": 0.7,
+        "training_time": 0.24,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 2,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.81,
+        "precision_score": 0.42,
+        "recall_score": 0.49,
+        "f1_score": 0.45,
+        "training_time": 0.06,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 1.6,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.73,
+        "f1_score": 0.73,
+        "training_time": 0.31,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 1.6,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.73,
+        "f1_score": 0.73,
+        "training_time": 0.34,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 1.6,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.79,
+        "precision_score": 0.4,
+        "recall_score": 0.47,
+        "f1_score": 0.44,
+        "training_time": 0.07,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 1,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.71,
+        "f1_score": 0.72,
+        "training_time": 0.41,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 1,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.71,
+        "f1_score": 0.72,
+        "training_time": 0.41,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 1,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.07,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.1,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.79,
+        "precision_score": 0.4,
+        "recall_score": 0.48,
+        "f1_score": 0.44,
+        "training_time": 0.56,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.1,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.93,
+        "precision_score": 0.7,
+        "recall_score": 0.69,
+        "f1_score": 0.69,
+        "training_time": 1.71,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.1,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.06,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.01,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.35,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.01,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.37,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.01,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.15,
+        "precision_score": 0.04,
+        "recall_score": 0.25,
+        "f1_score": 0.06,
+        "training_time": 0.06,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.001,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.59,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.001,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 1.03,
+        "hidden_layers": [
+            4,
+            2
+        ],
+        "learning_rate": 0.001,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.92,
+        "precision_score": 0.7,
+        "recall_score": 0.67,
+        "f1_score": 0.68,
+        "training_time": 0.08,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 2,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.93,
+        "precision_score": 0.67,
+        "recall_score": 0.73,
+        "f1_score": 0.69,
+        "training_time": 0.27,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 2,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.93,
+        "precision_score": 0.67,
+        "recall_score": 0.73,
+        "f1_score": 0.69,
+        "training_time": 0.27,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 2,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.81,
+        "precision_score": 0.41,
+        "recall_score": 0.48,
+        "f1_score": 0.45,
+        "training_time": 0.08,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 1.6,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.72,
+        "f1_score": 0.72,
+        "training_time": 0.38,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 1.6,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.72,
+        "f1_score": 0.72,
+        "training_time": 0.38,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 1.6,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.76,
+        "precision_score": 0.4,
+        "recall_score": 0.43,
+        "f1_score": 0.41,
+        "training_time": 0.08,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 1,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.95,
+        "precision_score": 0.71,
+        "recall_score": 0.71,
+        "f1_score": 0.71,
+        "training_time": 0.48,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 1,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.95,
+        "precision_score": 0.71,
+        "recall_score": 0.71,
+        "f1_score": 0.71,
+        "training_time": 0.47,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 1,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.07,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.1,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.1,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.1,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.09,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.1,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.07,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.01,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.28,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.01,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.29,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.01,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.15,
+        "precision_score": 0.04,
+        "recall_score": 0.25,
+        "f1_score": 0.06,
+        "training_time": 0.07,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.001,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.71,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.001,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.98,
+        "hidden_layers": [
+            8,
+            4
+        ],
+        "learning_rate": 0.001,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.88,
+        "precision_score": 0.63,
+        "recall_score": 0.71,
+        "f1_score": 0.66,
+        "training_time": 0.11,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 2,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.94,
+        "precision_score": 0.93,
+        "recall_score": 0.98,
+        "f1_score": 0.95,
+        "training_time": 1.01,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 2,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.95,
+        "precision_score": 0.94,
+        "recall_score": 0.98,
+        "f1_score": 0.95,
+        "training_time": 1.25,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 2,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.93,
+        "precision_score": 0.71,
+        "recall_score": 0.68,
+        "f1_score": 0.69,
+        "training_time": 0.09,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 1.6,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.92,
+        "precision_score": 0.67,
+        "recall_score": 0.72,
+        "f1_score": 0.69,
+        "training_time": 0.5,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 1.6,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.92,
+        "precision_score": 0.67,
+        "recall_score": 0.72,
+        "f1_score": 0.69,
+        "training_time": 0.47,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 1.6,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.78,
+        "precision_score": 0.4,
+        "recall_score": 0.47,
+        "f1_score": 0.43,
+        "training_time": 0.09,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 1,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.72,
+        "f1_score": 0.72,
+        "training_time": 0.93,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 1,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.96,
+        "precision_score": 0.72,
+        "recall_score": 0.72,
+        "f1_score": 0.72,
+        "training_time": 0.95,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 1,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.11,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.1,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.12,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.1,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.12,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.1,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.1,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.01,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.33,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.01,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.38,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.01,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.13,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.001,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.69,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.001,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.7,
+        "hidden_layers": [
+            16,
+            8
+        ],
+        "learning_rate": 0.001,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.92,
+        "precision_score": 0.71,
+        "recall_score": 0.67,
+        "f1_score": 0.68,
+        "training_time": 0.19,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 2,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.87,
+        "precision_score": 0.69,
+        "recall_score": 0.6,
+        "f1_score": 0.63,
+        "training_time": 0.2,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 2,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.87,
+        "precision_score": 0.69,
+        "recall_score": 0.6,
+        "f1_score": 0.63,
+        "training_time": 0.2,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 2,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.75,
+        "precision_score": 0.55,
+        "recall_score": 0.65,
+        "f1_score": 0.56,
+        "training_time": 0.18,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 1.6,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.79,
+        "precision_score": 0.57,
+        "recall_score": 0.67,
+        "f1_score": 0.59,
+        "training_time": 0.19,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 1.6,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.79,
+        "precision_score": 0.57,
+        "recall_score": 0.67,
+        "f1_score": 0.59,
+        "training_time": 0.19,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 1.6,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.91,
+        "precision_score": 0.7,
+        "recall_score": 0.66,
+        "f1_score": 0.67,
+        "training_time": 0.18,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 1,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.98,
+        "precision_score": 0.98,
+        "recall_score": 0.95,
+        "f1_score": 0.96,
+        "training_time": 1.45,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 1,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.98,
+        "precision_score": 0.98,
+        "recall_score": 0.95,
+        "f1_score": 0.96,
+        "training_time": 1.43,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 1,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.19,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.1,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.18,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.1,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.18,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.1,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.18,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.01,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.62,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.01,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 0.62,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.01,
+        "epochs": 10000
+    },
+    {
+        "accuracy_score": 0.02,
+        "precision_score": 0.01,
+        "recall_score": 0.25,
+        "f1_score": 0.01,
+        "training_time": 0.18,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.001,
+        "epochs": 100
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 1.78,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.001,
+        "epochs": 1000
+    },
+    {
+        "accuracy_score": 0.57,
+        "precision_score": 0.14,
+        "recall_score": 0.25,
+        "f1_score": 0.18,
+        "training_time": 2.4,
+        "hidden_layers": [
+            32,
+            16
+        ],
+        "learning_rate": 0.001,
+        "epochs": 10000
+    }
+]

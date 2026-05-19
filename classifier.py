@@ -17,11 +17,11 @@ RF_RESULTS = "rf_c_results.json"
 
 TEST_SPLIT_SIZE = 0.3
 
-EPOCHS = 1000
+EPOCHS_LIST = [100, 1000, 10000]
 HIDDEN_LAYERS_LIST = [(4,2),(8,4),(16,8),(32,16)]
 LEARNING_RATES = [2, 1.6, 1, 0.1, 0.01, 0.001]
 
-TREES_LIST = [1, 10, 100]
+TREES_LIST = [10, 100, 250]
 MAX_FEATURES_LIST = [2, 3]
 CRITERION = 'gini'
 
@@ -118,22 +118,23 @@ def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_tra
         'training_time': round(training_time,2)
     }
 
-def test_mlp(learning_rates, hidden_layers_list, x_train_scaled, x_test_scaled, y_train, y_test):
+def test_mlp(learning_rates, hidden_layers_list, epochs_list, x_train_scaled, x_test_scaled, y_train, y_test):
     results = []
     best_result = None
 
     for hidden_layers in hidden_layers_list:
         for learning_rate in learning_rates:
-            result = mlp(hidden_layers, EPOCHS, learning_rate, len(x_train_scaled), x_train_scaled, x_test_scaled, y_train, y_test)
+            for epochs in epochs_list:
+                result = mlp(hidden_layers, epochs, learning_rate, len(x_train_scaled), x_train_scaled, x_test_scaled, y_train, y_test)
 
-            result['hidden_layers'] = hidden_layers
-            result['learning_rate'] = learning_rate
-            result['epochs'] = EPOCHS
+                result['hidden_layers'] = hidden_layers
+                result['learning_rate'] = learning_rate
+                result['epochs'] = epochs
 
-            if best_result is None or result['f1_score'] > best_result['f1_score']:
-                best_result = result 
+                if best_result is None or result['f1_score'] > best_result['f1_score']:
+                    best_result = result 
 
-            results.append(result)
+                results.append(result)
 
     with open(MLP_RESULTS, mode="w", encoding="utf-8", newline="") as file:
         file.write(json.dumps(results, indent=4))
@@ -167,7 +168,7 @@ def main():
     x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
 
     rf_result = test_random_forest(TREES_LIST, MAX_FEATURES_LIST, CRITERION, x_train, x_test, y_train, y_test)
-    mlp_result = test_mlp(LEARNING_RATES, HIDDEN_LAYERS_LIST, x_train_scaled, x_test_scaled, y_train, y_test)
+    mlp_result = test_mlp(LEARNING_RATES, HIDDEN_LAYERS_LIST, EPOCHS_LIST, x_train_scaled, x_test_scaled, y_train, y_test)
 
     print("\n---------- Random Forest - Best Result ----------")
     print(rf_result)

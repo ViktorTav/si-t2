@@ -1,0 +1,62 @@
+[
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 0.97,
+        "f1_score": 0.98,
+        "training_time": 0.0,
+        "trees": 1,
+        "max_features": 2,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.0,
+        "trees": 1,
+        "max_features": 3,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 0.97,
+        "f1_score": 0.98,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 2,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.02,
+        "trees": 10,
+        "max_features": 3,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.13,
+        "trees": 100,
+        "max_features": 2,
+        "criterion": "gini"
+    },
+    {
+        "accuracy_score": 1.0,
+        "precision_score": 1.0,
+        "recall_score": 1.0,
+        "f1_score": 1.0,
+        "training_time": 0.13,
+        "trees": 100,
+        "max_features": 3,
+        "criterion": "gini"
+    }
+]
