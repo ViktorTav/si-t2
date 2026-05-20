@@ -1,6 +1,8 @@
 import json
 from time import time
 
+from matplotlib import pyplot as plt
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -16,8 +18,8 @@ RF_RESULTS = "rf_r_results.json"
 
 TEST_SPLIT_SIZE = 0.3
 
-EPOCHS_LIST = [1000, 10000]
-HIDDEN_LAYERS_LIST = [(4,2),(8,4),(16,8),(32,16)]
+EPOCHS_LIST = [100, 1000, 10000]
+HIDDEN_LAYERS_LIST = [(4,2),(8,4),(16,8)]
 LEARNING_RATES = [1, 0.1, 0.01, 0.001]
 
 TREES_LIST = [10, 100, 250]
@@ -40,7 +42,7 @@ def scale_dataset(x_train, x_test):
 
     return x_train_scaled, x_test_scaled
 
-def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_test):
+def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_test, return_model=False):
     print("\n--------- Random Forest ----------")
     print(f" Trees: {trees}")
     print(f" Max Features: {max_features}")
@@ -67,6 +69,9 @@ def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_te
     print(f" Training time: {(training_time):.2f}s")
     print("----------------------------------\n")
 
+    if return_model:
+        return rf
+
     rf_pred = rf.predict(x_test)
 
     return {
@@ -74,7 +79,7 @@ def random_forest(trees, max_features, criterion, x_train, x_test, y_train, y_te
         'training_time': round(training_time,2)
     }
 
-def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_train, y_test):
+def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_train, y_test, return_model=False):
     print("\n-------------- MLP ---------------")
     print(f" Hidden layers: {hidden_layers}")
     print(f" Epochs: {epochs}")
@@ -93,6 +98,7 @@ def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_tra
         nesterovs_momentum=False,
         learning_rate_init=learning_rate,
         alpha=0.0,
+        n_iter_no_change=epochs
     )
 
     start = time()
@@ -104,8 +110,11 @@ def mlp(hidden_layers, epochs, learning_rate, batch_size, x_train, x_test, y_tra
     print(f" Training time: {(training_time):.2f}s")
     print("----------------------------------\n")
 
-    mlp_pred = mlp.predict(x_test)
+    if return_model:
+        return mlp
 
+    mlp_pred = mlp.predict(x_test)
+    
     return {
         'rmse': round(root_mean_squared_error(y_test, mlp_pred), 4),
         'training_time': round(training_time,2)
@@ -156,7 +165,7 @@ def test_random_forest(trees_list, max_features_list, criterion, x_train, x_test
 
     return best_result
 
-def main():
+def test():
     x_train, x_test, y_train, y_test = load_dataset(DATASET_FILE, TEST_SPLIT_SIZE)
     x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
 
@@ -168,6 +177,50 @@ def main():
 
     print("\n--------------- MLP - Best Result ---------------")
     print(mlp_result)
+
+def main():
+    x_train, x_test, y_train, y_test = load_dataset(DATASET_FILE, TEST_SPLIT_SIZE)
+    x_train_scaled, x_test_scaled = scale_dataset(x_train, x_test)
+
+    mlp_model = mlp((4,2), 10000, 0.01, len(x_train_scaled), x_train_scaled, x_test_scaled, y_train, y_test, True)
+    rf_model = random_forest(250, 2, 'squared_error', x_train, x_test, y_train, y_test, True)
+
+    mlp_pred = mlp_model.predict(x_test_scaled)
+    rf_pred = rf_model.predict(x_test)
+
+    print("\n" + "="*30)
+    print(f"MSE RANDOM FOREST: {root_mean_squared_error(y_test, rf_pred):.4f}")
+    print(f"MSE MLP:           {root_mean_squared_error(y_test, mlp_pred):.4f}")
+    print("="*30)
+
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(14, 5))
+
+    ax1.plot(mlp_model.loss_curve_)
+    ax1.set_title('Curva de Perda - MLP')
+    ax1.set_xlabel('Iterações')
+    ax1.set_ylabel('Custo (Loss)')
+    ax1.grid(True)
+
+    x_line = np.linspace(y_test.min()-10, y_test.max()+10, 2)
+    y_line = x_line
+
+    ax2.scatter(y_test, mlp_pred, alpha=0.3)
+    ax2.plot(x_line, y_line, color='red')
+    ax2.set_title('Real vs Previsto - MLP')
+    ax2.set_xlabel("Valores Reais")
+    ax2.set_ylabel("Valores Previstos")
+    ax2.grid(True)
+
+    ax3.scatter(y_test, rf_pred, alpha=0.3)
+    ax3.plot(x_line, y_line, color='red')
+    ax3.set_title('Real vs Previsto - Random Forest')
+    ax3.set_xlabel("Valores Reais")
+    ax3.set_ylabel("Valores Previstos")
+    ax3.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+
 
 if __name__ == "__main__":
     main()
