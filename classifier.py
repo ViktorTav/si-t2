@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 
 RANDOM_SEED = 42
 
@@ -196,18 +196,22 @@ def main():
     rf_pred = rf_model.predict(x_test)
 
     print("--- Random Forest ---")
-    print(f" Accurancy score: {accuracy_score(y_test, rf_pred):.2%}")
+    print(f" Accuracy score: {accuracy_score(y_test, rf_pred):.2%}")
     print(f" Precision score: {precision_score(y_test, rf_pred, average='macro'):.2%}")
     print(f" Recall score: {recall_score(y_test, rf_pred, average='macro'):.2%}")
     print(f" F1 score: {f1_score(y_test, rf_pred, average='macro'):.2%}")
 
+    print(classification_report(y_test, rf_pred))
+
     print("\n\n")
 
     print("--- MLP ---")
-    print(f" Accurancy score: {accuracy_score(y_test, mlp_pred):.2%}")
+    print(f" Accuracy score: {accuracy_score(y_test, mlp_pred):.2%}")
     print(f" Precision score: {precision_score(y_test, mlp_pred, average='macro', zero_division=0.0):.2%}")
     print(f" Recall score: {recall_score(y_test, mlp_pred, average='macro'):.2%}")
     print(f" F1 score: {f1_score(y_test, mlp_pred, average='macro'):.2%}")
+
+    print(classification_report(y_test, mlp_pred))
 
     fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 
